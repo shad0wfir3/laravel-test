@@ -15,12 +15,19 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->string('slug');
+            $table->boolean('published');
+            $table->dateTime('published_date');
+            $table->integer('revision_id')->unsigned();
+            $table->foreign('revision_id')->references('id')->on('article_revisions');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     /**
-     * Reverse the migrations.
+     *s Reverse the migrations.
      *
      * @return void
      */
