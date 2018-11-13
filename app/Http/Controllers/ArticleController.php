@@ -20,6 +20,9 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::with('revision')->paginate(20);
+
+        $articles = Article::with('revision_list')->paginate(20);
+        dd($articles);
         return view('backend.articles.index',compact('articles'));
     }
 

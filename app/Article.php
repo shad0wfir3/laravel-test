@@ -30,13 +30,17 @@ class Article extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function tags(){
-        return $this->belongsToMany(Tag::class,'article_id');
+        return $this->belongsToMany(Tag::class,'articles_tags','article_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories(){
-        return $this->belongsToMany(Category::class,'article_id');
+        return $this->belongsToMany(Category::class,'articles_categories','article_id');
+    }
+
+    public function revision_list(){
+        return $this->hasMany(ArticleRevision::class,'article_id');
     }
 }
