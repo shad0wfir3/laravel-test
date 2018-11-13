@@ -19,8 +19,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::with('revision')->paginate(20);
-
-        dd($articles);
+        return view('backend.articles.index',compact('articles'));
     }
 
     /**
@@ -30,7 +29,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.articles.create');
     }
 
     /**
@@ -41,7 +40,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**

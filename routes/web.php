@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','SiteController@index')->name('home');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
-Route::get('/admin', 'HomeController@index')->name('home');
+Route::get('/admin', 'AdminController@index')->name('admin');
 
 //We would normally define authentication route params here, but for this purpose the controllers has been initialised with an auth constructor
 Route::prefix('admin')->group(function(){
