@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        User::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         $main_user = [
             'name' => 'Eamon',
             'email' => 'eamon@symantic.co.za',
@@ -21,5 +27,9 @@ class UsersTableSeeder extends Seeder
         ];
 
         User::create($main_user);
+
+        factory(User::class,10)->create();
+
+
     }
 }

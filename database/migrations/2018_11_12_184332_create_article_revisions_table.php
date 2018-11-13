@@ -19,6 +19,7 @@ class CreateArticleRevisionsTable extends Migration
             $table->foreign('author_id')->references('id')->on('users');
             $table->text('content');
             $table->string('featured_image_id');
+            $table->integer('article_id');
             $table->timestamps();
             $table->softDeletes();
         });

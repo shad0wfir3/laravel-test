@@ -17,4 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/admin', 'HomeController@index')->name('home');
+
+//We would normally define authentication route params here, but for this purpose the controllers has been initialised with an auth constructor
+Route::prefix('admin')->group(function(){
+    Route::resource('articles','ArticleController');
+    Route::resource('categories','CategoryController');
+    Route::resource('tags','TagController');
+});
+
