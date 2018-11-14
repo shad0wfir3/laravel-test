@@ -33,5 +33,7 @@
         $('.ckeditor').ckeditor();
         // $('.textarea').ckeditor(); // if class is prefered.
     </script>
+
+@yield('page_scripts')
 </body>
 </html>

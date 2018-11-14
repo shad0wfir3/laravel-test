@@ -30,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
 
     /**
@@ -41,7 +41,22 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+        ]);
+
+        $title = $request->get('title');
+
+        $slug = slugify($title);
+
+        $data = [
+            'title' => $title,
+            'slug' => $slug
+        ];
+
+        Category::create($data);
+
+        return redirect()->route('categories.index')->with('success','Category Created Succesfully');
     }
 
     /**
@@ -52,7 +67,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $category = Category::with('articles.revision')->find($category)->first();
+
+        return view('backend.categories.show',compact('category'));
     }
 
     /**

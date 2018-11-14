@@ -1,7 +1,7 @@
 <?php
 
-if(function_exists('slugify')){
-    function slugify($title){
+if(!function_exists('slugify')){
+    function slugify($text){
 
         // replace non letter or digits by -
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);

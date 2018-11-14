@@ -9,7 +9,9 @@ class Category extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['title','slug'];
+
     public function articles(){
-        return $this->belongsToMany(Article::class,'articles_categories','cateogry_id');
+        return $this->belongsToMany(Article::class,'articles_categories','categories_id');
     }
 }

@@ -8,48 +8,20 @@
                 <div class="card-header">Create Article</div>
 
                 <div class="card-body">
-                    <form>
+                    <form method="post" action="{{route('categories.store')}}">
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Title</label>
-                                <input type="text" class="form-control" name="title" id="inputEmail4" placeholder="Title">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">Slug</label>
-                                <input type="text" class="form-control" name="slug" id="inputPassword4" placeholder="Slug">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" name="title" id="title" placeholder="Category Title">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="textarea" class="form-control ckeditor" id="inputAddress" placeholder="">
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
+                        @if($errors->has('title'))
+                            <div class="alert alert-danger">
+                                {!! $errors->first('title') !!}
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                                <label class="form-check-label" for="gridCheck">
-                                    Check me out
-                                </label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        @endif
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </form>
 
                 </div>
@@ -57,4 +29,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('page_scripts')
+
+
 @endsection
