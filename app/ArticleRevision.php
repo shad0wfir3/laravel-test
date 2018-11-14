@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ArticleRevision extends Model
 {
     use SoftDeletes;
+
+    public function article(){
+        return $this->hasOne(Article::class,'revision_id');
+    }
+
 }

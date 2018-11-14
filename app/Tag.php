@@ -10,7 +10,6 @@ class Tag extends Model
     use SoftDeletes;
 
     public function articles(){
-
         return $this->belongsToMany(Article::class,'articles_tags','tag_id');
     }
 }

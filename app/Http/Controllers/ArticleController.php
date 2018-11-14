@@ -21,8 +21,8 @@ class ArticleController extends Controller
     {
         $articles = Article::with('revision')->paginate(20);
 
-        $articles = Article::with('revision_list')->paginate(20);
-        dd($articles);
+//        $articles = Article::with('revision_list')->paginate(20);
+//        dd($articles);
         return view('backend.articles.index',compact('articles'));
     }
 

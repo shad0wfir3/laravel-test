@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     use SoftDeletes;
+
+    public function articles(){
+        return $this->belongsToMany(Article::class,'articles_categories','cateogry_id');
+    }
 }

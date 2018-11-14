@@ -26,5 +26,12 @@
             @yield('content')
         </main>
     </div>
+
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
+    <script>
+        $('.ckeditor').ckeditor();
+        // $('.textarea').ckeditor(); // if class is prefered.
+    </script>
 </body>
 </html>

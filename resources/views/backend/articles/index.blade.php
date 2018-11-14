@@ -9,7 +9,7 @@
                     <h2>
                         Articles
                         <small>
-                            <a href="#" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus"></i> Add</a>
+                            <a href="{{ route('articles.create') }}" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus"></i> Add</a>
                         </small>
 
                     </h2>
