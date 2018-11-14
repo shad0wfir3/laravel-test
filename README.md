@@ -2,10 +2,20 @@
 
 
 - Clone git repository
+- Run composer install command
 - Copy .env.example and rename to .env
-- Create a database and fill in database details in the .env file
 - Run php artisan key:generate
-- Run composer:install
 - Run npm install
+- Open .env file and update database details.
 - Run php artisan migrate --seed
+- Run npm run dev
+- Run php artisan serve
+
+
+#Login Details
+
+Username : admin@test.com
+
+Password : 12345
+
  
