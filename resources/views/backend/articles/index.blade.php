@@ -37,12 +37,15 @@
                             @if($article->published == 1)
                                 <td><span class="badge badge-success">Published</span></td>
                             @else
-                                <td><span class="badge badge-danger">UnPublished</span></td>
+                                <td><span class="badge badge-danger">Unpublished</span></td>
                             @endif
-                            <td>{{ $article->published_date->format('d F Y @ H:i') }}</td>
+                            @if($article->published_date)
+                                <td>{{ $article->published_date->format('d F Y @ H:i') }}</td>
+                            @else
+                                <td>Unpublished</td>
+                            @endif
                             <td>
                                 <a href="{{ route('articles.show',$article->id) }}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
-                                <a href="{{ route('articles.edit',$article->id) }}" class="btn btn-dark btn-sm"><i class="fa fa-edit"></i></a>
                                 <form action="{{ route('articles.destroy', $article->id)}}" method="post" style="display:inline">
                                     @csrf
                                     @method('DELETE')

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\ArticleRevision;
+use App\Category;
 use App\Http\Requests\ArticleCreateRequest;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -33,7 +37,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('backend.articles.create');
+        $categories = Category::all();
+
+        return view('backend.articles.create',compact('categories'));
     }
 
     /**
@@ -44,10 +50,42 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-//        $validatedData = $request->validate([
-//            'title' => 'required|unique:posts|max:255',
-//            'body' => 'required',
-//        ]);
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ]);
+
+        $article_revision_data = [
+            'author_id' => Auth::user()->id,
+            'content' => $request->get('content'),
+            'featured_image_id' => 'unused',
+            'article_id' => '0'
+        ];
+
+
+        if($request->get('published') == 'on'){
+            $published_date = Carbon::now();
+            $published = 1;
+        }else{
+            $published_date = null;
+            $published = 0;
+        }
+        $revision = ArticleRevision::create($article_revision_data);
+
+        $article_data = [
+            'title' => $request->get('title'),
+            'slug' => slugify($request->get('title')),
+            'published' => $published,
+            'published_date' => $published_date,
+            'revision_id' => $revision->id
+        ];
+        $article = Article::create($article_data);
+
+        $article->revision->article_id = $article->id;
+        $article->revision->save();
+
+
+        return redirect()->route('articles.index')->with('success','Article Created Succefully');
 
     }
 
@@ -93,6 +131,13 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+
+        $article->delete();
+
+        return redirect()->route('articles.index')
+            ->with('success','Product deleted successfully');
+
+
         //
     }
 }

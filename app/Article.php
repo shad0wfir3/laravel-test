@@ -19,6 +19,14 @@ class Article extends Model
         'published_date'
     ];
 
+    protected $fillable = [
+        'title',
+        'slug',
+        'published',
+        'published_date',
+        'revision_id',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

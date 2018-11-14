@@ -8,48 +8,48 @@
                 <div class="card-header">Create Article</div>
 
                 <div class="card-body">
-                    <form>
+                    <form action="{{ route('articles.store') }}" method="post">
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Title</label>
                                 <input type="text" class="form-control" name="title" id="inputEmail4" placeholder="Title">
+                                @if($errors->has('title'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('title') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Slug</label>
-                                <input type="text" class="form-control" name="slug" id="inputPassword4" placeholder="Slug">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress">Address</label>
-                            <input type="textarea" class="form-control ckeditor" id="inputAddress" placeholder="">
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity">
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
+                                <label for="inputPassword4">Category</label>
+                                <select class="form-control" name="category" id="category">
+                                    <option value="0">Select category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{ $category->title }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip">
-                            </div>
+
                         </div>
                         <div class="form-group">
+                            <label for="inputAddress">Content</label>
+                            <textarea class="textarea" name="content" id="" cols="30" rows="10"></textarea>
+                            @if($errors->has('content'))
+                                <div class="text-danger">
+                                    {{ $errors->first('content') }}
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" type="checkbox" id="gridCheck" name="published">
                                 <label class="form-check-label" for="gridCheck">
-                                    Check me out
+                                    Published
                                 </label>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </form>
 
                 </div>
@@ -57,4 +57,11 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('/vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
+<script>
+    $('.textarea').ckeditor();
+    // $('.textarea').ckeditor(); // if class is prefered.
+</script>
 @endsection

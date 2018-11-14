@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->boolean('published');
-            $table->dateTime('published_date');
+            $table->dateTime('published_date')->nullable();
             $table->integer('revision_id')->unsigned();
             $table->foreign('revision_id')->references('id')->on('article_revisions');
             $table->timestamps();

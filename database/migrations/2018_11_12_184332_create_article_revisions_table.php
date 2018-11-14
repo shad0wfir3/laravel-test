@@ -18,8 +18,8 @@ class CreateArticleRevisionsTable extends Migration
             $table->integer('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users');
             $table->text('content');
-            $table->string('featured_image_id');
-            $table->integer('article_id');
+            $table->string('featured_image_id')->nullable();
+            $table->integer('article_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

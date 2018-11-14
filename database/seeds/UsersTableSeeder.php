@@ -19,8 +19,8 @@ class UsersTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $main_user = [
-            'name' => 'Eamon',
-            'email' => 'eamon@symantic.co.za',
+            'name' => 'Admin',
+            'email' => 'admin@test.com',
             'email_verified_at' => now(),
             'password' => bcrypt('12345'), // secret
             'remember_token' => str_random(10),
